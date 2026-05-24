@@ -6,6 +6,7 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 
 - 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
 - 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
+- ⚡ **[amajorai/skills](https://github.com/amajorai/skills)** for edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
 
 ## Why
 
@@ -156,4 +157,3 @@ Invoke as `/partymd:party`.
 
 ---
 
-More Claude Code skills at **[amajorai/skills](https://github.com/amajorai/skills)**: edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
