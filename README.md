@@ -6,7 +6,7 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 
 Most AI dev tools stop when you close your laptop. party.md doesn't. Run it on a server, a Pi, or GitHub Actions and use GitHub Projects as the interface. Your team files issues the normal way; the agent builds them. Nobody needs to touch Claude Code.
 
-### Where to run party.md
+## Where to run party.md
 
 | Environment | How | Best for |
 |-------------|-----|----------|
