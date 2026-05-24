@@ -1,11 +1,11 @@
 # 🎉 party.md
 
+Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
+
 [![Stars](https://shieldcn.dev/github/stars/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![Forks](https://shieldcn.dev/github/forks/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![License](https://shieldcn.dev/github/license/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![Issues](https://shieldcn.dev/github/issues/amajorai/party.md.svg)](https://github.com/amajorai/party.md/issues)
-
-Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
 
 ## Works great with
 
