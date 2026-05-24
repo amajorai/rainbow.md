@@ -1,10 +1,10 @@
 ---
-name: shoji
+name: rainbow
 description: "GitHub Projects kanban board agent. On first run, sets up a GitHub Project with Backlog → Ready → In Progress → In Review → Done + Blocked columns and saves your preferences for build skill, merge strategy, and refinement mode. On subsequent runs (via /loop or GitHub Actions), scans for new issues, handles refinement via issue comments, spawns parallel build subagents, tracks PRs, and updates project status automatically. Your kanban board builds itself."
 argument-hint: [--setup] [--issue <number>] [--status]
 ---
 
-# Shoji
+# Rainbow
 
 You are a continuous development agent. Issues move through a GitHub Projects kanban board as you refine requirements, build features, and merge code. The user watches progress through the board; you do the work on the other side of the screen.
 
@@ -18,10 +18,10 @@ You are a continuous development agent. Issues move through a GitHub Projects ka
 Best-effort — never blocks the user. If the command fails, continue silently to Phase 1.
 
 ```bash
-npx --yes skills update shoji -y 2>/dev/null || true
+npx --yes skills update rainbow -y 2>/dev/null || true
 ```
 
-If the output says the skill was updated, stop and tell the user: **"shoji.md was just updated. Re-run your command to use the new version."** Otherwise continue silently.
+If the output says the skill was updated, stop and tell the user: **"rainbow.md was just updated. Re-run your command to use the new version."** Otherwise continue silently.
 
 
 ## Phase 1: Mode Detection
@@ -30,7 +30,7 @@ Run these checks silently:
 
 ```bash
 # Existing config?
-cat .shoji.config.json 2>/dev/null && echo "HAS_CONFIG" || echo "NO_CONFIG"
+cat .rainbow.config.json 2>/dev/null && echo "HAS_CONFIG" || echo "NO_CONFIG"
 
 # GitHub CLI authenticated?
 gh auth status 2>&1 | head -3
@@ -46,14 +46,14 @@ Decide mode:
 
 | Condition | Mode |
 |-----------|------|
-| `--setup` in args OR no `.shoji.config.json` | **Setup** → Phase 2 |
+| `--setup` in args OR no `.rainbow.config.json` | **Setup** → Phase 2 |
 | `--issue <N>` in args OR `GITHUB_ACTIONS=true` | **Targeted** → Phase 7 (single issue) |
 | `--status` in args | **Status** → print board snapshot, exit |
 | Config exists, no special flags | **Tick** → Phase 7 (full scan) |
 
 **Pre-flight checks:**
 - If `gh auth status` fails: stop and tell the user to run `gh auth login` first.
-- If no GitHub remote: ask "Which GitHub repo should shoji.md manage? (e.g. `owner/repo`)" and set the remote.
+- If no GitHub remote: ask "Which GitHub repo should rainbow.md manage? (e.g. `owner/repo`)" and set the remote.
 - Record `OWNER` and `REPO` from `git remote get-url origin` (parse `github.com/OWNER/REPO`).
 
 
@@ -61,12 +61,12 @@ Decide mode:
 
 *Runs once. Ask all questions in a single message — do not proceed until answers are confirmed.*
 
-> **Setting up shoji.md** for `<owner/repo>`
+> **Setting up rainbow.md** for `<owner/repo>`
 >
 > Answer these once and I'll remember your preferences:
 >
 > **1. How should the board agent run?**
-> - [ ] **`/loop 5m /shoji`** — Run in your terminal. Claude Code CLI polls every 5 minutes. Free credit pool, easiest to start and stop. *(Recommended to start)*
+> - [ ] **`/loop 5m /rainbow`** — Run in your terminal. Claude Code CLI polls every 5 minutes. Free credit pool, easiest to start and stop. *(Recommended to start)*
 > - [ ] **GitHub Actions (event-triggered)** — Triggers automatically when an issue is opened or labeled. Runs in the cloud 24/7. Requires `ANTHROPIC_API_KEY` in repo secrets.
 > - [ ] **Both** — Local loop for active sessions; Actions as a fallback when your terminal is closed.
 >
@@ -76,7 +76,7 @@ Decide mode:
 > - [ ] **Basic build** — Explore → implement → commit. No quality gates. Fastest.
 >
 > **3. How should built code be merged?**
-> - [ ] **Branch + PR, you review** — Agent opens a PR on a `shoji/<issue-number>-<slug>` branch. You review and merge manually. *(Recommended)*
+> - [ ] **Branch + PR, you review** — Agent opens a PR on a `rainbow/<issue-number>-<slug>` branch. You review and merge manually. *(Recommended)*
 > - [ ] **Branch + PR, auto-merge** — Agent opens the PR and immediately approves + merges it. Fully autonomous.
 > - [ ] **Direct commit to main** — Agent commits directly to main. No PR. Fastest, riskiest.
 >
@@ -103,12 +103,12 @@ Once the user answers all five questions, continue to Phase 3.
 gh project list --owner $OWNER --format json --limit 50
 ```
 
-If a project named **"shoji.md"** already exists: use it. Record its `number` and `id` (node ID, `PVT_...`). Skip to 3c.
+If a project named **"rainbow.md"** already exists: use it. Record its `number` and `id` (node ID, `PVT_...`). Skip to 3c.
 
 If not, create one:
 
 ```bash
-gh project create --owner $OWNER --title "shoji.md" --format json
+gh project create --owner $OWNER --title "rainbow.md" --format json
 ```
 
 Record the `number` and `id` from the output.
@@ -174,7 +174,7 @@ After all mutations, run `gh project field-list` again to collect the final opti
 ### 3c. Ensure labels exist
 
 ```bash
-gh label create "shoji" --color "0075ca" --description "Managed by shoji.md" --force
+gh label create "rainbow" --color "0075ca" --description "Managed by rainbow.md" --force
 gh label create "awaiting-clarification" --color "e4e669" --description "Agent asked a question; waiting for reply" --force
 gh label create "building" --color "0052cc" --description "Agent is building this issue" --force
 gh label create "blocked" --color "d73a4a" --description "Issue is blocked" --force
@@ -191,16 +191,16 @@ Collect into a config object. It will be written in Phase 6.
 
 Create this file:
 
-**`.github/workflows/shoji.yml`:**
+**`.github/workflows/rainbow.yml`:**
 
 ```yaml
-name: shoji.md agent
+name: rainbow.md agent
 on:
   issues:
     types: [opened, labeled]
 
 jobs:
-  shoji:
+  rainbow:
     runs-on: ubuntu-latest
     if: github.event.issue.state == 'open'
     permissions:
@@ -212,22 +212,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Run shoji agent
+      - name: Run rainbow agent
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          direct_prompt: "/shoji --issue ${{ github.event.issue.number }}"
+          direct_prompt: "/rainbow --issue ${{ github.event.issue.number }}"
           allowed_tools: "Bash,Read,Write,Edit,Glob,Grep"
 ```
 
 Tell the user:
 
-> Workflow created at `.github/workflows/shoji.yml`. To activate it:
+> Workflow created at `.github/workflows/rainbow.yml`. To activate it:
 > 1. Repo → **Settings → Secrets and variables → Actions**
 > 2. Add secret: `ANTHROPIC_API_KEY` = your Anthropic API key
 > 3. Commit and push this workflow file
 >
-> shoji.md will trigger automatically whenever an issue is opened or labeled in your repo.
+> rainbow.md will trigger automatically whenever an issue is opened or labeled in your repo.
 
 
 ## Phase 5: vibe.md Setup
@@ -251,7 +251,7 @@ Then invoke it: `Skill({ skill: "vibe" })`
 
 ## Phase 6: Save Config and Finish Setup
 
-Write `.shoji.config.json` (substitute real values):
+Write `.rainbow.config.json` (substitute real values):
 
 ```json
 {
@@ -277,7 +277,7 @@ Write `.shoji.config.json` (substitute real values):
     "buildSkill": "ship | ship-fast | basic",
     "mergeStrategy": "branch-pr-manual | branch-pr-auto | direct",
     "refinementMode": "agent-decides | always | skip",
-    "branchPrefix": "shoji/"
+    "branchPrefix": "rainbow/"
   }
 }
 ```
@@ -285,16 +285,16 @@ Write `.shoji.config.json` (substitute real values):
 Commit the config and workflow (if created):
 
 ```bash
-git add .shoji.config.json
-git add .github/workflows/shoji.yml 2>/dev/null || true
-git commit -m "chore: add shoji.md config"
+git add .rainbow.config.json
+git add .github/workflows/rainbow.yml 2>/dev/null || true
+git commit -m "chore: add rainbow.md config"
 git push
 ```
 
 Print a setup summary:
 
 ```
-shoji.md is ready 🌈
+rainbow.md is ready 🌈
 
   Project:    https://github.com/orgs/<owner>/projects/<number>
   Build:      /<build_skill>
@@ -303,33 +303,33 @@ shoji.md is ready 🌈
   Run mode:   <run_mode>
 
 To start the board loop:
-  /loop 5m /shoji
+  /loop 5m /rainbow
 
-Or push any issue with the `shoji` label to trigger it.
+Or push any issue with the `rainbow` label to trigger it.
 ```
 
 
 ## Phase 7: Tick Mode
 
-*Runs on every `/shoji` call after setup. Also the handler for GitHub Actions triggers (`--issue <N>`) and `/shoji --status`.*
+*Runs on every `/rainbow` call after setup. Also the handler for GitHub Actions triggers (`--issue <N>`) and `/rainbow --status`.*
 
 ### 7a. Load config
 
 ```bash
-cat .shoji.config.json
+cat .rainbow.config.json
 ```
 
-If missing: stop and tell the user to run `/shoji --setup`.
+If missing: stop and tell the user to run `/rainbow --setup`.
 
 Extract: `owner`, `projectNumber`, `projectId`, `fields.status.*`, `settings.*`
 
 ### 7b. Sync untracked issues into the project
 
-Fetch all open repo issues labeled `shoji` that are NOT yet in the project:
+Fetch all open repo issues labeled `rainbow` that are NOT yet in the project:
 
 ```bash
-# All open issues with the shoji label
-gh issue list --state open --label "shoji" --json number,url,title --limit 200
+# All open issues with the rainbow label
+gh issue list --state open --label "rainbow" --json number,url,title --limit 200
 
 # All issues currently in the project
 gh project item-list $PROJECT_NUM --owner $OWNER --format json --limit 200
@@ -357,7 +357,7 @@ Fetch all project items with status `Backlog`. For each:
 
 **If labeled `awaiting-clarification`:**
 - Fetch comments: `gh issue view $NUM --json comments -q '.comments[].body'`
-- Find the last `[shoji.md]` refinement comment (look for the marker string `**[shoji.md]**`)
+- Find the last `[rainbow.md]` refinement comment (look for the marker string `**[rainbow.md]**`)
 - Check if a non-agent comment exists after that comment's timestamp
 - If the user replied: read the reply, append it to the issue body as a "## Clarification" section, remove the `awaiting-clarification` label, move to Ready (see move command below)
 - If no reply yet: skip (still waiting)
@@ -375,7 +375,7 @@ Load `settings.refinementMode`:
 
 **Refinement comment:**
 ```
-**[shoji.md]** Before I start building, I want to make sure I get this right:
+**[rainbow.md]** Before I start building, I want to make sure I get this right:
 
 1. What's the expected outcome? What should work or look different after this is done?
 2. Are there specific files, components, or behaviours I should focus on?
@@ -428,7 +428,7 @@ After collecting all items, spawn **parallel build subagents** — one per issue
 > **Config:**
 > - Build skill: `<settings.buildSkill>`  (`ship` | `ship-fast` | `basic`)
 > - Merge strategy: `<settings.mergeStrategy>`  (`branch-pr-manual` | `branch-pr-auto` | `direct`)
-> - Branch: `shoji/<ISSUE_NUM>-<slug>`
+> - Branch: `rainbow/<ISSUE_NUM>-<slug>`
 >
 > **Steps:**
 >
@@ -436,7 +436,7 @@ After collecting all items, spawn **parallel build subagents** — one per issue
 >    `gh issue view <ISSUE_NUM> --json title,body,comments`
 >
 > 2. Create a branch (unless merge strategy is `direct`):
->    `git checkout -b shoji/<ISSUE_NUM>-<slug>`
+>    `git checkout -b rainbow/<ISSUE_NUM>-<slug>`
 >
 > 3. Build using the configured skill:
 >    - `ship` → `Skill({ skill: "ship", args: "<issue title + key requirements>" })`
@@ -457,7 +457,7 @@ After collecting all items, spawn **parallel build subagents** — one per issue
 >
 > 6. If merge strategy is `branch-pr-auto`: approve and merge immediately:
 >    ```bash
->    gh pr review $PR_NUM --approve --body "**[shoji.md]** Auto-approved"
+>    gh pr review $PR_NUM --approve --body "**[rainbow.md]** Auto-approved"
 >    gh pr merge $PR_NUM --squash --auto
 >    ```
 >
@@ -470,24 +470,24 @@ After collecting all items, spawn **parallel build subagents** — one per issue
 > 8. Post a completion comment on the issue:
 >    ```bash
 >    # For PR strategies:
->    gh issue comment <ISSUE_NUM> --body "**[shoji.md]** Built — PR #$PR_NUM ready for review."
+>    gh issue comment <ISSUE_NUM> --body "**[rainbow.md]** Built — PR #$PR_NUM ready for review."
 >    # For direct strategy:
->    gh issue comment <ISSUE_NUM> --body "**[shoji.md]** Built — merged directly to main."
+>    gh issue comment <ISSUE_NUM> --body "**[rainbow.md]** Built — merged directly to main."
 >    ```
 >
 > 9. Remove the `building` label:
 >    `gh issue edit <ISSUE_NUM> --remove-label "building"`
 >
-> Do NOT close the issue — shoji handles that when the PR merges or direct commit is confirmed.
-> Do NOT move the project status — shoji handles that in the next tick.
+> Do NOT close the issue — rainbow handles that when the PR merges or direct commit is confirmed.
+> Do NOT move the project status — rainbow handles that in the next tick.
 
 ### 7e. Check In Progress items
 
 For each project item with status `In Progress`:
 
 ```bash
-# Check for a completion comment from shoji
-gh issue view $NUM --json comments -q '.comments[].body' | grep "\[shoji\.md\].*Built"
+# Check for a completion comment from rainbow
+gh issue view $NUM --json comments -q '.comments[].body' | grep "\[rainbow\.md\].*Built"
 
 # Check for a linked PR
 gh pr list --search "closes:#$NUM" --json number,state,mergedAt --limit 5
@@ -506,7 +506,7 @@ gh pr list --search "closes:#$NUM" --json number,state,mergedAt --limit 5
 
 - **No PR, no `building` label, item last updated >60 minutes ago**: stale build detected. Post a comment and move back to Ready for retry:
   ```bash
-  gh issue comment $NUM --body "**[shoji.md]** No build activity detected. Moving back to Ready for retry."
+  gh issue comment $NUM --body "**[rainbow.md]** No build activity detected. Moving back to Ready for retry."
   gh project item-edit ... --single-select-option-id "$READY_OPTION_ID"
   ```
 
@@ -521,12 +521,12 @@ gh pr list --search "closes:#$NUM" --json number,state,mergedAt,reviewDecision -
 - **PR merged**: move to Done, close issue (same as 7e above)
 - **`CHANGES_REQUESTED`**: move back to In Progress with a note:
   ```bash
-  gh issue comment $NUM --body "**[shoji.md]** PR has changes requested. Moving back to In Progress."
+  gh issue comment $NUM --body "**[rainbow.md]** PR has changes requested. Moving back to In Progress."
   gh project item-edit ... --single-select-option-id "$IN_PROGRESS_OPTION_ID"
   ```
 - **Merge strategy is `branch-pr-auto` and PR is open (no review yet)**: auto-approve and merge:
   ```bash
-  gh pr review $PR_NUM --approve --body "**[shoji.md]** Auto-approved"
+  gh pr review $PR_NUM --approve --body "**[rainbow.md]** Auto-approved"
   gh pr merge $PR_NUM --squash --auto
   ```
 - **Open, awaiting manual review**: leave in In Review, no action
@@ -536,7 +536,7 @@ gh pr list --search "closes:#$NUM" --json number,state,mergedAt,reviewDecision -
 After all processing, print a summary:
 
 ```
-shoji.md — <ISO timestamp>
+rainbow.md — <ISO timestamp>
 ────────────────────────────
 Backlog      <N>
 Ready        <N>
@@ -553,7 +553,7 @@ This tick:
   → Moved #7 "search" to In Review (PR #23 open)
   → Moved #5 "onboarding" to Done (PR #19 merged)
 
-Next check in ~5 min  (/loop 5m /shoji)
+Next check in ~5 min  (/loop 5m /rainbow)
 ```
 
 If `--status` was passed (status-only mode): print the snapshot and exit without taking any actions.
