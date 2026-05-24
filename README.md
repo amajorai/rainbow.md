@@ -91,8 +91,6 @@ Or set `SKILLS_AUTO_UPDATE: true` in your project CLAUDE.md to always auto-updat
 
 Invoke as `/shojimd:shoji`.
 
----
-
 ## Board columns
 
 | Column | Meaning |
