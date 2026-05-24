@@ -64,7 +64,7 @@ To reconnect later: `tmux attach -t party`
 ## Skills
 
 | Skill | What it does |
-|-------|-------------|
+|--------------------------------|-------------|
 | [`/party`](skills/party/SKILL.md) | First run: sets up your GitHub Project kanban board, configures build skill, merge strategy, and refinement mode. Every run after: scans for new issues, refines vague ones via comments, spawns parallel build agents, tracks PRs, and moves cards automatically. |
 
 ## How it works
