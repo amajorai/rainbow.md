@@ -14,8 +14,8 @@ Backlog → Ready → In Progress → In Review → Done
 
 ## Works great with
 
-- **[ship.md](https://github.com/amajorai/ship.md)** — Use as the build skill inside shoji.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
-- **[vibe.md](https://github.com/amajorai/vibe.md)** — Set up your production server and deployment pipeline first. shoji.md's setup phase will ask if you want to run vibe.md before enabling the board.
+- 📦 **[ship.md](https://github.com/amajorai/ship.md)** — Use as the build skill inside shoji.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
+- 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** — Set up your production server and deployment pipeline first. shoji.md's setup phase will ask if you want to run vibe.md before enabling the board.
 
 ## Skills
 
