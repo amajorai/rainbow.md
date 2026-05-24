@@ -4,19 +4,7 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 
 ## Why
 
-Most AI coding tools are tied to your laptop. You open a chat, describe what you want, watch it build, and close the tab when you're done. The moment you walk away, the work stops.
-
-rainbow.md flips that model. Your interface is GitHub, not Claude Code. You file issues the same way you always have. You check the kanban board the same way your team always has. The agents run in the background on whatever machine you point them at, whether you're at your desk or not.
-
-This means you can:
-
-- **File an issue from your phone** and come back to a merged PR
-- **Run the agent on a cheap cloud server, VPS, or Raspberry Pi.** Any machine with `gh` and `npx` installed will work
-- **Keep your team's existing GitHub workflow.** Issues, projects, PRs, labels, all unchanged. The board is the interface; the agents are the implementation detail
-- **Build 24/7 without a terminal open.** GitHub Actions triggers rainbow.md automatically on new issues. A long-running loop on a server handles the rest
-- **Scale to a team.** Everyone files issues; the agent picks them up in order. No one needs to know Claude Code exists
-
-It follows the same structure software development has always used: backlog, refinement, in progress, review, done. The difference is agents do the building instead of humans typing the code.
+Most AI dev tools stop when you close your laptop. rainbow.md doesn't. Run it on a server, a Pi, or GitHub Actions and use GitHub Projects as the interface. Your team files issues the normal way; the agent builds them. Nobody needs to touch Claude Code.
 
 ### Where to run rainbow.md
 
