@@ -4,7 +4,7 @@
 >
 > rainbow.md is the agent that moves your issues through that spectrum. Drop a feature into Backlog. Watch it travel through each color until it ships.
 
-A GitHub Projects kanban board that builds itself. One skill. Your issues become features automatically.
+Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
 
 ```
 Backlog → Ready → In Progress → In Review → Done
