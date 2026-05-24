@@ -1,23 +1,23 @@
-# 🌈 rainbow.md
+# 🎉 party.md
 
 Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
 
 ## Why
 
-Most AI dev tools stop when you close your laptop. rainbow.md doesn't. Run it on a server, a Pi, or GitHub Actions and use GitHub Projects as the interface. Your team files issues the normal way; the agent builds them. Nobody needs to touch Claude Code.
+Most AI dev tools stop when you close your laptop. party.md doesn't. Run it on a server, a Pi, or GitHub Actions and use GitHub Projects as the interface. Your team files issues the normal way; the agent builds them. Nobody needs to touch Claude Code.
 
-### Where to run rainbow.md
+### Where to run party.md
 
 | Environment | How | Best for |
 |-------------|-----|----------|
-| **Your laptop** | `/loop 5m /rainbow` in a Claude Code terminal | Getting started, active dev sessions |
+| **Your laptop** | `/loop 5m /party` in a Claude Code terminal | Getting started, active dev sessions |
 | **Cloud server / VPS** (Hetzner, OVH, AWS, DigitalOcean) | SSH in, install Claude Code + `gh`, run `/loop` in `tmux` | 24/7 unattended operation |
 | **Raspberry Pi** | Same as VPS. Claude Code runs fine on arm64 | Low-cost always-on home server |
-| **GitHub Actions** | rainbow.md creates the workflow for you during setup | Serverless, event-driven, no machine to maintain |
-| **Any CI/CD runner** | Trigger `/rainbow --issue <N>` as a job step | Custom pipelines, self-hosted runners |
+| **GitHub Actions** | party.md creates the workflow for you during setup | Serverless, event-driven, no machine to maintain |
+| **Any CI/CD runner** | Trigger `/party --issue <N>` as a job step | Custom pipelines, self-hosted runners |
 
 **Recommended path:**
-1. Start locally with `/loop 5m /rainbow` to test your setup
+1. Start locally with `/loop 5m /party` to test your setup
 2. Once it's working, SSH into a server (or use [vibe.md](https://github.com/amajorai/vibe.md) to provision one), clone your repo, and run the loop there permanently
 3. Optionally add GitHub Actions as a fallback for when the server is down
 
@@ -40,37 +40,37 @@ gh auth login
 git clone https://github.com/your-org/your-repo.git
 cd your-repo
 
-# 5. Install rainbow.md
-npx skills add amajorai/rainbow.md
+# 5. Install party.md
+npx skills add amajorai/party.md
 
 # 6. Run setup (first time only)
-claude "/rainbow --setup"
+claude "/party --setup"
 
 # 7. Start the board loop in a persistent session
-tmux new -s rainbow
-claude "/loop 5m /rainbow"
+tmux new -s party
+claude "/loop 5m /party"
 # Detach: Ctrl+B then D
 # The loop keeps running after you close SSH
 ```
 
-To reconnect later: `tmux attach -t rainbow`
+To reconnect later: `tmux attach -t party`
 
 ## Works great with
 
-- 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside rainbow.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
-- 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. rainbow.md's setup phase will offer to run it for you.
+- 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
+- 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
 
 ## Skills
 
 | Skill | What it does |
 |-------|-------------|
-| [`/rainbow`](skills/rainbow/SKILL.md) | First run: sets up your GitHub Project kanban board, configures build skill, merge strategy, and refinement mode. Every run after: scans for new issues, refines vague ones via comments, spawns parallel build agents, tracks PRs, and moves cards automatically. |
+| [`/party`](skills/party/SKILL.md) | First run: sets up your GitHub Project kanban board, configures build skill, merge strategy, and refinement mode. Every run after: scans for new issues, refines vague ones via comments, spawns parallel build agents, tracks PRs, and moves cards automatically. |
 
 ## How it works
 
 ```mermaid
 flowchart TD
-    A["🆕 Issue opened\n(labeled 'rainbow')"] --> B["📥 Backlog\nAdded to project"]
+    A["🆕 Issue opened\n(labeled 'party')"] --> B["📥 Backlog\nAdded to project"]
     B --> C{Refinement mode?}
     C -->|"always / agent decides\n(vague issue)"| D["💬 Refinement\nAgent posts comment\nwaits for reply"]
     D -->|"User replies"| E["✅ Ready\nIssue updated with clarification"]
@@ -80,7 +80,7 @@ flowchart TD
     G -->|/ship| H["🚢 Full pipeline\ninterview → explore → plan\n→ implement → verify → harden"]
     G -->|/ship-fast| I["⚡ Streamlined\nexplore → plan\n→ implement → verify"]
     G -->|basic| J["🔨 Basic build\nexplore → implement → commit"]
-    H & I & J --> K["🔀 PR opened\nbranch: rainbow/<issue>-<slug>"]
+    H & I & J --> K["🔀 PR opened\nbranch: party/<issue>-<slug>"]
     K --> L{Merge strategy}
     L -->|"manual review"| M["👀 In Review\nWaiting for you"]
     L -->|"auto-merge"| N["✅ Done\nMerged automatically"]
@@ -91,13 +91,13 @@ flowchart TD
 ## Quickstart
 
 ```bash
-npx skills add amajorai/rainbow.md
+npx skills add amajorai/party.md
 ```
 
 Then in any repo:
 
 ```
-/rainbow
+/party
 ```
 
 First run walks you through setup. Takes about 2 minutes. After that, keep your GitHub Project open in a browser tab and watch the board fill itself in.
@@ -106,13 +106,13 @@ First run walks you through setup. Takes about 2 minutes. After that, keep your 
 
 **Local loop** (start here):
 ```
-/loop 5m /rainbow
+/loop 5m /party
 ```
 Runs every 5 minutes in your terminal. Uses your local Claude Code credit pool. Stop it any time with `Ctrl+C`.
 
 **GitHub Actions** (24/7, no terminal needed):
 
-During setup, choose "GitHub Actions" and rainbow.md creates `.github/workflows/rainbow.yml` for you. Add `ANTHROPIC_API_KEY` to your repo secrets and it runs automatically whenever you open or label an issue.
+During setup, choose "GitHub Actions" and party.md creates `.github/workflows/party.yml` for you. Add `ANTHROPIC_API_KEY` to your repo secrets and it runs automatically whenever you open or label an issue.
 
 **Both** combines the local loop for active sessions with Actions as a fallback for when your terminal is closed.
 
@@ -120,7 +120,7 @@ During setup, choose "GitHub Actions" and rainbow.md creates `.github/workflows/
 
 Pass `--update` to get the latest version before running:
 ```
-/rainbow --update
+/party --update
 ```
 
 Or set `SKILLS_AUTO_UPDATE: true` in your project CLAUDE.md to always auto-update.
@@ -128,11 +128,11 @@ Or set `SKILLS_AUTO_UPDATE: true` in your project CLAUDE.md to always auto-updat
 ### Claude Code plugin
 
 ```
-/plugin marketplace add amajorai/rainbow.md
-/plugin install rainbowmd@amajorai
+/plugin marketplace add amajorai/party.md
+/plugin install partymd@amajorai
 ```
 
-Invoke as `/rainbowmd:rainbow`.
+Invoke as `/partymd:party`.
 
 ## Board columns
 
@@ -149,11 +149,11 @@ Invoke as `/rainbowmd:rainbow`.
 
 | Label | Meaning |
 |-------|---------|
-| `rainbow` | Tells rainbow.md to track this issue |
+| `party` | Tells party.md to track this issue |
 | `awaiting-clarification` | Agent posted a question; waiting for your reply |
 | `building` | A build subagent is actively working |
 | `blocked` | Issue is blocked (manual) |
 
 ---
 
-Part of [amajorai/skills](https://github.com/amajorai/skills). For more skills check out the full collection.
+More Claude Code skills at **[amajorai/skills](https://github.com/amajorai/skills)**: edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
