@@ -1,16 +1,6 @@
 # 🌈 rainbow.md
 
-> A rainbow moves through a full spectrum before it's complete. So does your code: Backlog, Ready, In Progress, In Review, Done. Each stage a different color on the board.
->
-> rainbow.md is the agent that moves your issues through that spectrum. Drop a feature into Backlog. Watch it travel through each color until it ships.
-
 Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
-
-```
-Backlog → Ready → In Progress → In Review → Done
-                                              ↑
-                              agents handle everything in here
-```
 
 ## Why
 
