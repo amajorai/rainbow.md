@@ -155,5 +155,3 @@ Invoke as `/partymd:party`.
 | `building` | A build subagent is actively working |
 | `blocked` | Issue is blocked (manual) |
 
----
-
