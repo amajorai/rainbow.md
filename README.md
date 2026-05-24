@@ -12,6 +12,11 @@ Backlog → Ready → In Progress → In Review → Done
                               agents handle everything in here
 ```
 
+## Works great with
+
+- **[ship.md](https://github.com/amajorai/ship.md)** — Use as the build skill inside shoji.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
+- **[vibe.md](https://github.com/amajorai/vibe.md)** — Set up your production server and deployment pipeline first. shoji.md's setup phase will ask if you want to run vibe.md before enabling the board.
+
 ## Skills
 
 | Skill | What it does |
@@ -107,13 +112,6 @@ Invoke as `/shojimd:shoji`.
 | `awaiting-clarification` | Agent posted a question; waiting for your reply |
 | `building` | A build subagent is actively working |
 | `blocked` | Issue is blocked (manual) |
-
----
-
-## Works great with
-
-- **[ship.md](https://github.com/amajorai/ship.md)** — Use as the build skill inside shoji.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
-- **[vibe.md](https://github.com/amajorai/vibe.md)** — Set up your production server and deployment pipeline first. shoji.md's setup phase will ask if you want to run vibe.md before enabling the board.
 
 ---
 
