@@ -2,6 +2,11 @@
 
 Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
 
+## Works great with
+
+- 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
+- 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
+
 ## Why
 
 Most AI dev tools stop when you close your laptop. party.md doesn't. Run it on a server, a Pi, or GitHub Actions and use GitHub Projects as the interface. Your team files issues the normal way; the agent builds them. Nobody needs to touch Claude Code.
@@ -54,11 +59,6 @@ claude "/loop 5m /party"
 ```
 
 To reconnect later: `tmux attach -t party`
-
-## Works great with
-
-- 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
-- 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
 
 ## Skills
 
