@@ -2,6 +2,7 @@
 
 Use GitHub issues and projects as a kanban board to ship features 24/7 autonomously.
 
+[![Status](https://shieldcn.dev/badge/status-experimental-orange.svg)](https://github.com/amajorai/party.md)
 [![Stars](https://shieldcn.dev/github/stars/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![Forks](https://shieldcn.dev/github/forks/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![License](https://shieldcn.dev/github/license/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
