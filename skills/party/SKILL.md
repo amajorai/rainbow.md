@@ -1,7 +1,7 @@
 ---
 name: party
 description: "GitHub Projects kanban board agent. On first run, sets up a GitHub Project with Backlog → Ready → In Progress → In Review → Done + Blocked columns and saves your preferences for build skill, merge strategy, and refinement mode. On subsequent runs (via /loop or GitHub Actions), scans for new issues, handles refinement via issue comments, spawns parallel build subagents, tracks PRs, and updates project status automatically. Your kanban board builds itself."
-argument-hint: [--setup] [--issue <number>] [--status]
+argument-hint: "[--setup] [--issue <number>] [--status]"
 ---
 
 # Party
