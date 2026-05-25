@@ -144,6 +144,10 @@ Then invoke: `Skill({ skill: "vibe" })`
 Write `.party.config.json` — see [references/config-template.md](references/config-template.md) for the full schema.
 
 ```bash
+# Ensure screenshot directory is tracked (not gitignored)
+grep -q ".party/screenshots" .gitignore 2>/dev/null && \
+  sed -i 's|\.party/screenshots.*||g' .gitignore || true
+
 git add .party.config.json
 git add .github/workflows/party.yml 2>/dev/null || true
 git commit -m "chore: add party.md config"
@@ -236,6 +240,8 @@ gh project item-edit \
 Collect all Ready items. For each: move to In Progress, add `building` label, derive a branch slug (lowercase, spaces/special chars → `-`, max 40 chars), add to batch.
 
 Spawn **parallel build subagents** — one per issue — using the Agent tool. For the full prompt template, see [references/build-agent-prompt.md](references/build-agent-prompt.md). Wait for all to complete before continuing.
+
+Each build agent takes **before/after Playwright screenshots** of the running dev server (if one is detected) and posts them as a side-by-side table in the issue completion comment. Screenshots are committed to the feature branch and render inline in GitHub via raw.githubusercontent.com. Non-UI changes (backend, config) will have no dev server and will skip screenshots automatically.
 
 ### 7e. Check In Progress items
 
