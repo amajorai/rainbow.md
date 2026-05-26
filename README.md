@@ -14,7 +14,7 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 ## Works great with
 
 - 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: explore → plan → implement → verify → edge cases → E2E → security review.
-- 🔎 **[hunt.md](https://github.com/amajorai/hunt.md)** as the debug skill inside party.md — drop a bug issue into the board and party.md delegates it to `/hunt` for systematic root-cause investigation.
+- 🔎 **[fix.md](https://github.com/amajorai/fix.md)** as the debug skill inside party.md — drop a bug issue into the board and party.md delegates it to `/fix` for systematic root-cause investigation.
 - 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
 - 🎬 **[replay.md](https://github.com/amajorai/replay.md)** to record video proof of features as they ship — paste the link in your PR for instant visual sign-off.
 - ⚡ **[amajorai/skills](https://github.com/amajorai/skills)** for edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
