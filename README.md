@@ -109,6 +109,20 @@ Then in any repo:
 
 First run walks you through setup. Takes about 2 minutes. After that, keep your GitHub Project open in a browser tab and watch the board fill itself in.
 
+#### Setup interview
+
+On first run (or when you pass `--setup`), party.md asks five questions via interactive prompts — one at a time, waiting for each answer before continuing:
+
+| # | Question | Options |
+|---|----------|---------|
+| 1 | **How should the board agent run?** | Local loop (`/loop 5m /party`) · GitHub Actions · Both |
+| 2 | **Which skill should build features?** | `/ship` (full pipeline) · `/ship-fast` (streamlined, recommended) · Basic build |
+| 3 | **How should built code be merged?** | PR, you review (recommended) · PR, auto-merge · Direct commit to main |
+| 4 | **When should the agent ask clarifying questions?** | Agent decides (recommended) · Always · Skip |
+| 5 | **Run vibe.md setup first?** | Yes · No |
+
+After answering, party.md creates the GitHub Project, configures the six board columns, creates the required labels, optionally sets up the GitHub Actions workflow, and writes `.party.config.json`.
+
 ### Run modes
 
 **Local loop** (start here):
