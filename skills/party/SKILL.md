@@ -158,10 +158,24 @@ Create `.github/workflows/party.yml` — see [references/github-actions-workflow
 *Only if the user chose "Yes" in Phase 2.*
 
 ```bash
-ls .claude/skills/vibe.md 2>/dev/null || npx --yes skills add amajorai/vibe.md -y
+npx --yes skills list 2>/dev/null | grep -qE '^vibe$' && echo "ALREADY_INSTALLED" || echo "NOT_INSTALLED"
 ```
 
-Then invoke: `Skill({ skill: "vibe" })`
+If not installed:
+
+```bash
+npx --yes skills add amajorai/vibe.md -y
+```
+
+Then detect the running environment:
+
+```bash
+echo "CODEX=${CODEX:-false}"
+echo "CODEX_SANDBOX=${CODEX_SANDBOX:-}"
+```
+
+- **Already installed or Codex mode** (`CODEX=true` or `CODEX_SANDBOX` is set): invoke `Skill({ skill: "vibe" })` immediately.
+- **Claude Code mode (newly installed)**: tell the user: **"I've installed the `vibe` skill. Please run `/reload-plugins` in this session so it becomes available, then run `/vibe`."** Do not invoke it yourself. Continue to Phase 6.
 
 
 ## Phase 6: Save Config and Finish Setup

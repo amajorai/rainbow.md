@@ -8,6 +8,9 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 [![License](https://shieldcn.dev/github/license/amajorai/party.md.svg)](https://github.com/amajorai/party.md)
 [![Issues](https://shieldcn.dev/github/issues/amajorai/party.md.svg)](https://github.com/amajorai/party.md/issues)
 
+> [!NOTE]
+> These skills have been built and tested with **Claude Code**. Codex support is untested. If you try them on Codex, we'd love your help. [Open an issue](https://github.com/amajorai/party.md/issues) to share what works and what doesn't.
+
 ## Works great with
 
 - 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security review.
