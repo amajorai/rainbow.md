@@ -16,7 +16,7 @@ You are a continuous development agent. Issues move through a GitHub Projects ka
 *Skip unless `{{args}}` contains `--update`, or `SKILLS_AUTO_UPDATE: true` is set in your project CLAUDE.md.*
 
 ```bash
-npx --yes skills update amajorai/party.md -y 2>/dev/null || true
+npx --yes skills update party -y 2>/dev/null || true
 ```
 
 If the output says the skill was updated, stop and tell the user: **"party.md was just updated. Re-run your command to use the new version."** Otherwise continue silently.
