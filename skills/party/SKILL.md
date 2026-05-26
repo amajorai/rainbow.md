@@ -158,7 +158,7 @@ Create `.github/workflows/party.yml` — see [references/github-actions-workflow
 *Only if the user chose "Yes" in Phase 2.*
 
 ```bash
-ls .claude/skills/vibe.md 2>/dev/null || npx --yes skills add amajorai/vibe.md
+ls .claude/skills/vibe.md 2>/dev/null || npx --yes skills add amajorai/vibe.md -y
 ```
 
 Then invoke: `Skill({ skill: "vibe" })`
@@ -229,6 +229,8 @@ If `--issue <N>` targeted mode: only process that one issue.
 
 ### 7c. Handle Backlog items
 
+*Skip entirely if `--status` was passed — print snapshot in 7g and exit.*
+
 For each Backlog item:
 
 **Skip** if labeled `building` (build already in flight).
@@ -262,6 +264,8 @@ gh project item-edit \
 
 ### 7d. Build Ready items
 
+*Skip entirely if `--status` was passed.*
+
 Collect all Ready items. For each: move to In Progress, add `building` label, derive a branch slug (lowercase, spaces/special chars → `-`, max 40 chars), add to batch.
 
 Spawn **parallel build subagents** — one per issue — using the Agent tool. For the full prompt template, see [references/build-agent-prompt.md](references/build-agent-prompt.md). Wait for all to complete before continuing.
@@ -269,6 +273,8 @@ Spawn **parallel build subagents** — one per issue — using the Agent tool. F
 Each build agent takes **before/after Playwright screenshots** of the running dev server (if one is detected) and posts them as a side-by-side table in the issue completion comment. Screenshots are committed to the feature branch and render inline in GitHub via raw.githubusercontent.com. Non-UI changes (backend, config) will have no dev server and will skip screenshots automatically.
 
 ### 7e. Check In Progress items
+
+*Skip entirely if `--status` was passed.*
 
 ```bash
 gh issue view $NUM --json comments -q '.comments[].body' | grep "\[party\.md\].*Built"
@@ -280,6 +286,8 @@ gh pr list --search "closes:#$NUM" --json number,state,mergedAt --limit 5
 - **No PR, no `building` label, last updated >60 min** → post stale comment, move back to Ready
 
 ### 7f. Check In Review items
+
+*Skip entirely if `--status` was passed.*
 
 ```bash
 gh pr list --search "closes:#$NUM" --json number,state,mergedAt,reviewDecision --limit 5
