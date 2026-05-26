@@ -45,33 +45,58 @@ Decide mode:
 
 ## Phase 2: Setup Interview
 
-*Runs once. Ask all questions in a single message — do not proceed until answers are confirmed.*
+*Runs once. Use AskUserQuestion for each question below — one call per question, in order. Do not present these as markdown text or checkbox lists. Wait for each answer before proceeding to the next question. Once all five answers are collected, continue to Phase 3.*
 
-> **Setting up party.md** for `<owner/repo>`
->
-> **1. How should the board agent run?**
-> - [ ] **`/loop 5m /party`** — Local terminal, polls every 5 minutes *(Recommended to start)*
-> - [ ] **GitHub Actions** — Triggers on issue open/label, runs in the cloud 24/7. Requires `ANTHROPIC_API_KEY` secret.
-> - [ ] **Both** — Local for active sessions; Actions as fallback when terminal is closed.
->
-> **2. Which skill should build features?**
-> - [ ] **`/ship`** — Full pipeline: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security
-> - [ ] **`/ship-fast`** — Streamlined: explore → plan → implement → verify *(Recommended)*
-> - [ ] **Basic build** — Explore → implement → commit. No quality gates.
->
-> **3. How should built code be merged?**
-> - [ ] **Branch + PR, you review** — Agent opens a PR on `party/<issue-number>-<slug>`. You review and merge. *(Recommended)*
-> - [ ] **Branch + PR, auto-merge** — Agent opens and immediately merges the PR.
-> - [ ] **Direct commit to main** — No PR. Fastest, riskiest.
->
-> **4. Refinement phase** (clarifying questions before building):
-> - [ ] **Agent decides** — Asks if the issue is vague (no acceptance criteria, body <200 chars) *(Recommended)*
-> - [ ] **Always** — Every issue gets a clarifying comment
-> - [ ] **Skip** — Build from the issue as written
->
-> **5. Want to run vibe.md setup first?**
-> - [ ] Yes, run vibe.md setup
-> - [ ] No, skip for now
+**Setting up party.md for `<owner/repo>`**
+
+**Question 1 — How should the board agent run?**
+
+Call AskUserQuestion with:
+- question: "How should the board agent run?"
+- options:
+  1. "`/loop 5m /party` — Local terminal, polls every 5 minutes *(Recommended to start)*"
+  2. "GitHub Actions — Triggers on issue open/label, runs in the cloud 24/7. Requires `ANTHROPIC_API_KEY` secret."
+  3. "Both — Local for active sessions; Actions as fallback when terminal is closed."
+- multiSelect: false
+
+**Question 2 — Which skill should build features?**
+
+Call AskUserQuestion with:
+- question: "Which skill should build features?"
+- options:
+  1. "`/ship` — Full pipeline: interview → explore → plan → implement → verify → edge cases → E2E → simplify → security"
+  2. "`/ship-fast` — Streamlined: explore → plan → implement → verify *(Recommended)*"
+  3. "Basic build — Explore → implement → commit. No quality gates."
+- multiSelect: false
+
+**Question 3 — How should built code be merged?**
+
+Call AskUserQuestion with:
+- question: "How should built code be merged?"
+- options:
+  1. "Branch + PR, you review — Agent opens a PR on `party/<issue-number>-<slug>`. You review and merge. *(Recommended)*"
+  2. "Branch + PR, auto-merge — Agent opens and immediately merges the PR."
+  3. "Direct commit to main — No PR. Fastest, riskiest."
+- multiSelect: false
+
+**Question 4 — Refinement phase (clarifying questions before building)**
+
+Call AskUserQuestion with:
+- question: "When should the agent ask clarifying questions before building?"
+- options:
+  1. "Agent decides — Asks if the issue is vague (no acceptance criteria, body <200 chars) *(Recommended)*"
+  2. "Always — Every issue gets a clarifying comment"
+  3. "Skip — Build from the issue as written"
+- multiSelect: false
+
+**Question 5 — Run vibe.md setup first?**
+
+Call AskUserQuestion with:
+- question: "Want to run vibe.md setup first?"
+- options:
+  1. "Yes, run vibe.md setup"
+  2. "No, skip for now"
+- multiSelect: false
 
 Once all five questions are answered, continue to Phase 3.
 
