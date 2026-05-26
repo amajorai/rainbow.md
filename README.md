@@ -142,14 +142,11 @@ During setup, choose "GitHub Actions" and party.md creates `.github/workflows/pa
 
 **Both** combines the local loop for active sessions with Actions as a fallback for when your terminal is closed.
 
-### Auto-Update
+### Update
 
-Pass `--update` to get the latest version before running:
+```bash
+npx skills update party -y
 ```
-/party --update
-```
-
-Or set `SKILLS_AUTO_UPDATE: true` in your project CLAUDE.md to always auto-update.
 
 ### Claude Code plugin
 
