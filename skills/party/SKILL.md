@@ -87,7 +87,22 @@ Call AskUserQuestion with:
   2. "No, skip for now"
 - multiSelect: false
 
-Once all five questions are answered, continue to Phase 3.
+**Question 6 — Use spec.md to plan issues before building?**
+
+Call AskUserQuestion with:
+- question: "Want to use spec.md to break big tasks into atomic issues automatically? Run `/spec <task>` and it creates a structured GitHub epic + sub-issues that party.md can pick up."
+- options:
+  1. "Yes, install spec.md so I can /spec tasks before dropping them in the board *(Recommended for large features)*"
+  2. "No, I'll write issues manually"
+- multiSelect: false
+
+If "Yes": install spec.md:
+```bash
+npx --yes skills add amajorai/spec.md -y && echo "SPEC_INSTALLED" || echo "SPEC_INSTALL_FAILED"
+```
+Detect environment and handle reload the same way as Phase 5 (vibe.md install). Record `SPEC_AVAILABLE=true` in config if installed.
+
+Once all six questions are answered, continue to Phase 3.
 
 
 ## Phase 3: GitHub Project Setup
@@ -195,6 +210,10 @@ party.md is ready 🌈
 
 To start the board loop:
   /loop 5m /party
+
+Got a big feature to build? Plan it first:
+  /spec <what you want to build>
+  spec.md breaks it into atomic GitHub issues → party.md ships them automatically.
 ```
 
 
@@ -244,6 +263,19 @@ For each Backlog item:
 - `skip` → move to Ready immediately
 - `always` → post refinement comment, add `awaiting-clarification` label
 - `agent-decides` → fetch issue; if body >200 chars AND has acceptance criteria (`- [ ]` or "## Acceptance Criteria") AND mentions a specific file/component: move to Ready. Otherwise: post refinement comment.
+
+**Large/complex issue detection:** If body >1000 chars OR contains words like "redesign", "refactor entire", "new system", "build a", "from scratch" AND has no acceptance criteria checklist: post a comment suggesting spec.md instead of refinement:
+
+```
+**[party.md]** This looks like a large task. Consider running `/spec` on it first to break it into atomic sub-issues — party.md can then pick each one up automatically.
+
+  npx skills add amajorai/spec.md
+  /spec <summary of this issue>
+
+Once the sub-issues are created and labeled `party`, I'll pick them up on the next tick.
+```
+
+Then add `awaiting-clarification` and skip building until the user replies or creates sub-issues.
 
 **Refinement comment template:**
 ```
