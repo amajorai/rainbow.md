@@ -34,7 +34,7 @@ Decide mode:
 
 ## Phase 2: Setup Interview
 
-*Runs once. Use AskUserQuestion for each question below — one call per question, in order. Do not present these as markdown text or checkbox lists. Wait for each answer before proceeding to the next question. Once all five answers are collected, continue to Phase 3.*
+*Runs once. Use AskUserQuestion for each question below — one call per question, in order. Do not present these as markdown text or checkbox lists. Wait for each answer before proceeding to the next question. Once all six answers are collected, continue to Phase 3.*
 
 **Setting up party.md for `<owner/repo>`**
 
@@ -264,18 +264,18 @@ For each Backlog item:
 - `always` → post refinement comment, add `awaiting-clarification` label
 - `agent-decides` → fetch issue; if body >200 chars AND has acceptance criteria (`- [ ]` or "## Acceptance Criteria") AND mentions a specific file/component: move to Ready. Otherwise: post refinement comment.
 
-**Large/complex issue detection:** If body >1000 chars OR contains words like "redesign", "refactor entire", "new system", "build a", "from scratch" AND has no acceptance criteria checklist: post a comment suggesting spec.md instead of refinement:
+**Large/complex issue detection (runs before refinementMode check):** If body >1000 chars OR contains phrases like "redesign", "refactor entire", "new system", "rewrite", "from scratch" AND has no acceptance criteria checklist (`- [ ]` or "## Acceptance Criteria"): post a comment suggesting spec.md and skip the refinementMode branch entirely for this issue:
 
 ```
 **[party.md]** This looks like a large task. Consider running `/spec` on it first to break it into atomic sub-issues — party.md can then pick each one up automatically.
 
-  npx skills add amajorai/spec.md
+  npx --yes skills add amajorai/spec.md -y
   /spec <summary of this issue>
 
 Once the sub-issues are created and labeled `party`, I'll pick them up on the next tick.
 ```
 
-Then add `awaiting-clarification` and skip building until the user replies or creates sub-issues.
+Then add `awaiting-clarification` and skip building until the user replies or creates sub-issues. Do not run the refinementMode branch on this issue.
 
 **Refinement comment template:**
 ```
