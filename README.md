@@ -70,6 +70,7 @@ Invoke as `/partymd:party`.
 
 ## Works great with
 
+- 👻 **[spec.md](https://github.com/amajorai/spec.md)** as the planning step before party.md — run `/spec` to break a big task into atomic GitHub issues, then drop them into your board and let `/party` ship them all.
 - 📦 **[ship.md](https://github.com/amajorai/ship.md)** as the build skill inside party.md for full quality-gated feature delivery: explore → plan → implement → verify → edge cases → E2E → security review.
 - 🔎 **[fix.md](https://github.com/amajorai/fix.md)** as the debug skill inside party.md — drop a bug issue into the board and party.md delegates it to `/fix` for systematic root-cause investigation.
 - 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
