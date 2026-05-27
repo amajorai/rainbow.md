@@ -14,7 +14,7 @@ Use GitHub issues and projects as a kanban board to ship features 24/7 autonomou
 ## Quickstart
 
 ```bash
-npx skills add amajorai/party.md
+npx skills add -g amajorai/party.md
 ```
 
 Then in any repo:
@@ -52,12 +52,6 @@ Runs every 5 minutes in your terminal. Uses your local Claude Code credit pool. 
 During setup, choose "GitHub Actions" and party.md creates `.github/workflows/party.yml` for you. Add `ANTHROPIC_API_KEY` to your repo secrets and it runs automatically whenever you open or label an issue.
 
 **Both** combines the local loop for active sessions with Actions as a fallback for when your terminal is closed.
-
-### Update
-
-```bash
-npx skills update party -y
-```
 
 ### Claude Code plugin
 
@@ -122,7 +116,7 @@ git clone https://github.com/your-org/your-repo.git
 cd your-repo
 
 # 5. Install party.md
-npx skills add amajorai/party.md
+npx skills add -g amajorai/party.md
 
 # 6. Run setup (first time only)
 claude "/party --setup"
