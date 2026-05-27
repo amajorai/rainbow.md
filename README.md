@@ -53,6 +53,23 @@ During setup, choose "GitHub Actions" and party.md creates `.github/workflows/pa
 
 **Both** combines the local loop for active sessions with Actions as a fallback for when your terminal is closed.
 
+### Update
+
+```bash
+# Update this skill
+npx skills update party
+
+# Update all installed skills (interactive scope prompt)
+npx skills update
+
+# Update only global or project skills
+npx skills update -g
+npx skills update -p
+
+# Non-interactive (auto-detects scope)
+npx skills update -y
+```
+
 ### Claude Code plugin
 
 ```
