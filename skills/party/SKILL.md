@@ -259,12 +259,7 @@ For each Backlog item:
 
 **If labeled `awaiting-clarification`:** fetch comments and find the last `**[party.md]**` comment. If a non-agent reply exists after that timestamp: append it to the issue body as "## Clarification", remove the label, move to Ready. If no reply: skip.
 
-**No `awaiting-clarification`:** apply `settings.refinementMode`:
-- `skip` → move to Ready immediately
-- `always` → post refinement comment, add `awaiting-clarification` label
-- `agent-decides` → fetch issue; if body >200 chars AND has acceptance criteria (`- [ ]` or "## Acceptance Criteria") AND mentions a specific file/component: move to Ready. Otherwise: post refinement comment.
-
-**Large/complex issue detection (runs before refinementMode check):** If body >1000 chars OR contains phrases like "redesign", "refactor entire", "new system", "rewrite", "from scratch" AND has no acceptance criteria checklist (`- [ ]` or "## Acceptance Criteria"): post a comment suggesting spec.md and skip the refinementMode branch entirely for this issue:
+**Large/complex issue check (runs first):** If body >1000 chars OR title/body contains phrases like "redesign", "refactor entire", "new system", "rewrite", "from scratch" AND has no acceptance criteria checklist (`- [ ]` or "## Acceptance Criteria"): post a comment suggesting spec.md, add `awaiting-clarification`, and skip the refinementMode check entirely for this issue:
 
 ```
 **[party.md]** This looks like a large task. Consider running `/spec` on it first to break it into atomic sub-issues — party.md can then pick each one up automatically.
@@ -275,7 +270,10 @@ For each Backlog item:
 Once the sub-issues are created and labeled `party`, I'll pick them up on the next tick.
 ```
 
-Then add `awaiting-clarification` and skip building until the user replies or creates sub-issues. Do not run the refinementMode branch on this issue.
+**No `awaiting-clarification` (and not large/complex):** apply `settings.refinementMode`:
+- `skip` → move to Ready immediately
+- `always` → post refinement comment, add `awaiting-clarification` label
+- `agent-decides` → fetch issue; if body >200 chars AND has acceptance criteria (`- [ ]` or "## Acceptance Criteria") AND mentions a specific file/component: move to Ready. Otherwise: post refinement comment.
 
 **Refinement comment template:**
 ```
