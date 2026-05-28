@@ -86,9 +86,9 @@ Invoke as `/partymd:party`.
 - 🔎 **[fix.md](https://github.com/amajorai/fix.md)** as the debug skill inside party.md — drop a bug issue into the board and party.md delegates it to `/fix` for systematic root-cause investigation.
 - 🪅 **[vibe.md](https://github.com/amajorai/vibe.md)** to provision your production server and deployment pipeline before enabling the board. party.md's setup phase will offer to run it for you.
 - 🎬 **[replay.md](https://github.com/amajorai/replay.md)** to record video proof of features as they ship — paste the link in your PR for instant visual sign-off.
-- ⚡ **[amajorai/skills](https://github.com/amajorai/skills)** for edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
 - 🧪 **[sandbox.md](https://github.com/amajorai/sandbox.md)** to give each autonomous build a clean isolated environment — party.md can spawn a sandbox per issue, build inside it, and destroy it after the PR is merged.
-- 📋 **[ctx.md](https://github.com/amajorai/ctx.md)** to keep workspace context fresh — party.md's build agents orient instantly when CLAUDE.md and AGENTS.md are up to date.
+- 📋 **[context.md](https://github.com/amajorai/context.md)** to keep workspace context fresh — party.md's build agents orient instantly when CLAUDE.md and AGENTS.md are up to date.
+- ⚡ **[amajorai/skills](https://github.com/amajorai/skills)** for edge cases, E2E, payments, auth, SEO, icons, CI, observability, and 20+ more.
 
 ## Skills
 
