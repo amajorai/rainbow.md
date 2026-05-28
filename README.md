@@ -105,14 +105,14 @@ Most AI dev tools stop when you close your laptop. party.md doesn't. Run it on a
 | Environment | How | Best for |
 |-------------|-----|----------|
 | **Your laptop** | `/loop 5m /party` in a Claude Code terminal | Getting started, active dev sessions |
-| **Cloud server / VPS** (Hetzner, OVH, AWS, DigitalOcean) | SSH in, install Claude Code + `gh`, run `/loop` in `tmux` | 24/7 unattended operation |
+| **Cloud server / VPS** (Hetzner, OVH, AWS, DigitalOcean) | SSH in, install Claude Code + `gh`, run `/loop 5m /party` in `tmux` | 24/7 unattended operation |
 | **Raspberry Pi** | Same as VPS. Claude Code runs fine on arm64 | Low-cost always-on home server |
 | **GitHub Actions** | party.md creates the workflow for you during setup | Serverless, event-driven, no machine to maintain |
 | **Any CI/CD runner** | Trigger `/party --issue <N>` as a job step | Custom pipelines, self-hosted runners |
 
 **Recommended path:**
 1. Start locally with `/loop 5m /party` to test your setup
-2. Once it's working, SSH into a server (or use [vibe.md](https://github.com/amajorai/vibe.md) to provision one), clone your repo, and run the loop there permanently
+2. Once it's working, SSH into a server (or use [vibe.md](https://github.com/amajorai/vibe.md) to provision one), clone your repo, and run `/loop 5m /party` there permanently
 3. Optionally add GitHub Actions as a fallback for when the server is down
 
 #### Setting up on a server or Pi
