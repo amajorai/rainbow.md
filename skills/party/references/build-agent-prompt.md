@@ -47,7 +47,17 @@ Use this template per issue. Substitute real values for each field.
 > 3. Build using the configured skill:
 >    - `ship` → `Skill({ skill: "ship", args: "<issue title + key requirements>" })`
 >    - `ship-fast` → `Skill({ skill: "ship-fast", args: "<issue title + key requirements>" })`
->    - `basic` → read the issue, explore the relevant code, implement, commit
+>    - `basic` → read the issue, explore the relevant code, implement (do not commit yet — verify first in step 3.1)
+>
+> 3.1. **If build skill is `basic`:** after implementing, spawn an Opus agent to verify before committing:
+>    ```
+>    Agent({
+>      subagent_type: "claude",
+>      model: "opus",
+>      prompt: "Verify this implementation against the acceptance criteria from issue #<ISSUE_NUM>: <AC list from issue body>. Run the project build, then the full test suite + lint + typecheck. All pass → report success. Failures remain → fix directly and run again. After 3 passes with failures still present → report what failed and stop.",
+>    })
+>    ```
+>    If the agent reports success, commit the changes. If it reports failure after 3 passes, post a comment on the issue explaining what failed and stop — do not push broken code.
 >
 > 3.5. Take an **after screenshot** (same port detected above — skip if none):
 >    ```bash
