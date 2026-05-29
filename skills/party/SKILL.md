@@ -27,6 +27,8 @@ To use a stronger advisor model, edit `~/.claude/settings.json` and set `"adviso
 
 ## Phase 1: Mode Detection
 
+> All shell snippets in this skill assume a bash environment (GNU coreutils, `sed -i`, `$(...)`, `&&` chains). On Windows, run them through the Bash tool / Git Bash rather than PowerShell or cmd.
+
 ```bash
 cat .party.config.json 2>/dev/null && echo "HAS_CONFIG" || echo "NO_CONFIG"
 gh auth status 2>&1 | head -3
