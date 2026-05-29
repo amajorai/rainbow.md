@@ -1,0 +1,11 @@
+{
+  "name": "partymd",
+  "description": "GitHub Projects kanban board agent that builds itself. Refines issues, spawns parallel build subagents, tracks PRs, and updates project status automatically.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jia Wei Ng"
+  },
+  "repository": "https://github.com/amajorai/party.md",
+  "license": "MIT",
+  "keywords": ["party", "github-projects", "kanban", "automation", "issues", "agents", "pr"]
+}

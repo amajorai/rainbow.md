@@ -1,0 +1,13 @@
+{
+  "name": "partymd",
+  "owner": {
+    "name": "Jia Wei Ng"
+  },
+  "plugins": [
+    {
+      "name": "partymd",
+      "description": "GitHub Projects kanban board agent that builds itself. Refines issues, spawns parallel build subagents, tracks PRs, and updates project status automatically.",
+      "source": "."
+    }
+  ]
+}
